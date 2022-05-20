@@ -1,0 +1,21 @@
+
+<div class="card mb-4" style="border-radius: 16px">
+  <div class="card-header"><h3 style="text-align: center">Importer le fichier des encadrements PFE</h3></div>
+  <div class="card-body">
+<div class="d-grid gap-3 col-6 mx-auto">
+  <button class="btn btn-success" type="button" (click)="downloadFile()">Télécharger  Template Encadrement PFE .xslx</button>
+
+  <div class="form-row">
+    <div class="form-group">
+
+      <input class="form-control form-control-lg "  id="formFileLg" type="file" (change)="fileChange($event)" style="border-radius: 16px;" >
+    </div>
+
+    <div class="form-group d-grid">
+      <button (click)="readFileStage()" type="button" class="btn btn-danger ">Charger</button>
+    </div>
+  </div>
+
+</div>
+  </div>
+</div>

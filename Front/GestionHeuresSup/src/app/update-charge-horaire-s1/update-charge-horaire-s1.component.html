@@ -1,0 +1,37 @@
+<div class="card mb-4" style="border-radius: 16px">
+  <div class="card-header"><h3 style="text-align: center">Charge horaire Semster 1</h3></div>
+  <div class="card-body">
+<form [formGroup]="chargeSemster1Form" (ngSubmit)="updateChargeSemster1()">
+
+<div class="form-group ">
+  <label class="small mb-1" for="td" >Td</label>
+  <input class="form-control" formControlName="td" id="td" type="number"  style="border-radius: 16px;"
+         [ngClass]="{'is-invalid':td&&td.errors && td.touched}">
+  <div *ngIf="td&&td.hasError('required')"
+       class="invalid-feedback">
+    Le td est Obligatoire*
+  </div>
+</div>
+<div class="form-group ">
+  <label class="small mb-1" for="tp" >Tp</label>
+  <input class="form-control" formControlName="tp" id="tp" type="number" style="border-radius: 16px;"
+         [ngClass]="{'is-invalid':tp&&tp.errors && tp.touched}">
+  <div *ngIf="tp&&tp.hasError('required')"
+       class="invalid-feedback">
+    Le tp est Obligatoire*
+  </div>
+</div>
+<div class="form-group ">
+  <label class="small mb-1" for="cours" >Cours</label>
+  <input class="form-control" formControlName="cours" id="cours" type="number"  style="border-radius: 16px;"
+         [ngClass]="{'is-invalid':cours&&cours.errors && cours.touched}">
+  <div *ngIf="cours&&cours.hasError('required')"
+       class="invalid-feedback">
+    Le cours est Obligatoire*
+  </div>
+</div>
+  <button  class="btn btn-primary" >Ajouter</button>
+  <button  type="reset" (click)="close()" class="btn btn-danger " >Fermer</button>
+</form>
+  </div>
+</div>

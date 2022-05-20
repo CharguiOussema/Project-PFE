@@ -1,0 +1,42 @@
+
+<h3 style="text-align: center">Valider un enseignant</h3>
+<br>
+<form >
+  <div class="form-row ">
+    <div class="form-group has-search col-md-4" >
+      <span class="fa fa-search form-control-feedback "></span>
+      <input #query (keyup)="search(query.value)" type="text" class="form-control" placeholder="Search..." style="border-radius: 16px;">
+    </div>
+  </div>
+  <table class="table table-striped" border="1" style="text-align: center">
+    <thead class="bg-info">
+    <tr>
+      <th>Prénom et Nom</th>
+      <th>identifiant Unique</th>
+      <th>Email</th>
+      <th>Grade</th>
+      <th>Fonction</th>
+      <th>Departement</th>
+      <th colspan="2">Validation
+      <img src="" width="" height="">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let e of listEnseignant " style="cursor: pointer" >
+      <td (click)="detail(e)">{{e.prenomNom}}</td>
+      <td (click)="detail(e)">{{e.identifiantUnique}}</td>
+      <td (click)="detail(e)">{{e.email}}</td>
+      <td (click)="detail(e)">{{e.grade?.titre}}</td>
+      <td (click)="detail(e)"> {{e.fonction?.titre}}</td>
+      <td (click)="detail(e)">{{e.departement?.titre}}</td>
+      <td ><button class="btn btn-info" (click)="valider(e)" style="border-radius: 16px;">Valider </button></td>
+      <td><button class="btn btn-danger" (click)="bloquer(e)" style="border-radius: 16px;"> Bloquer </button></td>
+
+
+    </tr>
+    </tbody>
+  </table>
+</form>
+
+

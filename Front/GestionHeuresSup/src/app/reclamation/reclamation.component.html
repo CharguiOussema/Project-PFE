@@ -1,0 +1,37 @@
+<div class="card mb-4">
+  <div class="card-header"><h3 style="text-align: center">Réclamation</h3></div>
+  <div class="card-body">
+  <div class="card-body">
+    <form [formGroup]="reclamationForm" (ngSubmit)="envoyer()" >
+      <div class="form-group">
+        <label for="type">Type de réclamation</label>
+        <select class="form-control" formControlName="type" id="type" (ngModelChange)="selectTypeReclamation(this.type.value)"
+                [ngClass]="{'is-invalid':type&&type.errors && type.touched}">
+          <option [ngValue]="null"  disabled>Choisir le type de réclamation </option>
+          <option *ngFor="let t of typeReclamation" [ngValue]="t">{{t.type}}</option>
+        </select>
+        <div *ngIf="type&&type.hasError('required')"
+             class="invalid-feedback">
+          Le type de réclamation est Obligatoire*
+        </div>
+      </div>
+      <!-- Form Group (username)-->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" formControlName="description" id="description" rows="3" [ngClass]="{'is-invalid':description&&description.errors && description.touched}"></textarea>
+        <div *ngIf="description&&description.hasError('required')"
+             class="invalid-feedback">
+          Le discriotion est Obligatoire*
+        </div>
+      </div>
+
+
+
+
+      <!-- Save changes button-->
+      <button class="btn btn-primary" type="submit">Envoyer</button>
+      <button class="btn btn-danger" type="reset">Reset</button>
+    </form>
+  </div>
+</div>
+</div>

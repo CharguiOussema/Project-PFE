@@ -1,0 +1,63 @@
+
+<div class="card mb-4" style="border-radius: 16px">
+  <div class="card-header"><h3 style="text-align: center">Détail enseignant </h3></div>
+  <div class="card-body">
+<form [formGroup]="registerForm" >
+  <table class="table table-striped"  border="0">
+
+    <tr>
+      <th  class="bg-info">Prénom et Nom</th>
+      <td>{{enseignant.prenomNom}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">الإسم و اللقب	</th>
+      <td>{{enseignant.prenomNomArabe}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Rib</th>
+      <td>{{enseignant.rib}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Cin</th>
+      <td>{{enseignant.cin}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">identifiant Unique</th>
+      <td>{{enseignant.identifiantUnique}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Num Tel</th>
+      <td>{{enseignant.numTel}}/td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Email</th>
+      <td>{{enseignant.email}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Date de naissance</th>
+      <td>{{enseignant.dateNaissance}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Lieu de naissance</th>
+      <td>{{enseignant.dateNaissance}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">مكان الولادة</th>
+      <td>{{enseignant.lieuNaissanceArabe}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Fonction</th>
+      <td>{{enseignant.fonction?.titre}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Grade</th>
+      <td>{{enseignant.grade?.titre}}</td>
+    </tr>
+    <tr>
+      <th  class="bg-info">Departement</th>
+      <td>{{enseignant.departement?.titre}}</td>
+    </tr>
+  </table>
+</form>
+  </div>
+</div>

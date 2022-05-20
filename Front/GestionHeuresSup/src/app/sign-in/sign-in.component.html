@@ -1,0 +1,44 @@
+<html style ="background-color: #1c606a;">
+
+
+  <div class="col-xl-8" style="margin-left: auto ; margin-right: auto ; margin-bottom: auto; margin-top: auto; padding-top: 8%; padding-bottom: 5%; padding-left: 16%; padding-right: 16%"  >
+
+    <div class="card mb-4" style="border-radius: 16px">
+      <div class="card-header" ><h3 style="text-align: center">Connexion </h3></div>
+      <div class="card-body" >
+
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" >
+      <div class="form-group" >
+        <label for="email">Email</label>
+        <input type="text" class="form-control" formControlName="email" id="email" style="border-radius: 16px;"
+               [ngClass]="{'is-invalid':email&&email.errors && email.touched}">
+        <div *ngIf="email&&email.hasError('required')"
+             class="invalid-feedback">
+          L'email est Obligatoire*
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+      <input type="password" class="form-control" formControlName="password" id="password" style="border-radius: 16px;"
+             [ngClass]="{'is-invalid':password&&password.errors && password.touched}">
+        <div *ngIf="password&&password.hasError('required')"
+             class="invalid-feedback">
+          Le mot de passe est Obligatoire*
+        </div>
+
+      </div>
+      <button class="btn btn-primary btn-user btn-block" style="border-radius: 16px;" >Login</button>
+     <br>
+      <div style="text-align: center">
+        <a class="small"   href="/register"> <span style="font-size: large " >Créer un compte!</span></a>
+      </div>
+    </form>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</html>

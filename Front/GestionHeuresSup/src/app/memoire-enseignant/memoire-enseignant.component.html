@@ -1,0 +1,147 @@
+<h3 style="text-align: center">Mémorandum de la bourse d'heures supplémentaires d'enseignement</h3>
+<br>
+
+
+
+<div class="form-group" *ngIf="this.en.id != null"  >
+
+
+<table width="100%" *ngIf="this.tokenService.getFonction() != 'Enseignant'">
+  <tr>
+    <td width="25%"></td>
+    <td width="25%"></td>
+    <td width="25%"><button class="btn btn-outline-info" type="button" (click)="downloadFileMemoireExcel('Memoire2.xlsx',this.en)" style="  height: 37.99306px; font-size: 17px">Télecharger le fichier mémoire Excel</button></td>
+    <td width="25%"><button class="btn btn-outline-info" type="button" (click)="downloadFileMemoire('Memoire2.xlsx',this.en)" style="  height: 37.99306px; font-size: 17px">Télecharger le fichier mémoire PDF</button></td>
+  </tr>
+</table>
+</div>
+<br>
+<form [formGroup]="memoireForm">
+
+
+  <table border="0" width="100%" style="text-align: center">
+    <tr>
+      <td  valign="top">
+        <table border="1" width="70%"  >
+
+          <tr>
+
+            <th class="bg-info" style="font-size: 14px " valign="middle" width="80">Code</th>
+
+            <td valign="middle" > 000§§0006§01.101	</td>
+          </tr>
+
+          <tr>
+            <th class="bg-info" style="font-size: 14px" valign="middle" width="80">Prenom et Nom</th>
+            <td valign="middle">
+              <div *ngIf="this.tokenService.getFonction() != 'Enseignant'">
+              <select  class="form-select form-control" formControlName="enseignant" id="enseignant"    (ngModelChange)="selectEnseignant(this.enseignant.value)" >
+                <option [ngValue]="null" disabled>Choisir un enseignant</option>
+                <option *ngFor="let e of listEnseignant" [ngValue]="e" >{{e.prenomNom}}</option>
+              </select>
+              </div>
+              <div *ngIf="this.tokenService.getFonction() === 'Enseignant'">
+                {{en.prenomNom}}
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+      <td height="118" width="122">&nbsp;</td>
+      <td height="118" width="510" valign="top">
+        <table border="1" width="90%" >
+          <tr>
+            <th class="bg-info" style="font-size: 14px" width="90" >Période</th>
+            <td>{{this.etablisement?.periode}}</td>
+          </tr>
+          <tr>
+            <th class="bg-info" style="font-size: 14px" width="90">Grade</th>
+            <td>{{this.en.grade?.titre}}</td>
+          </tr>
+          <tr>
+            <th class="bg-info" style="font-size: 14px" width="90">Identifiant unique</th>
+            <td>{{this.en?.identifiantUnique}}</td>
+          </tr>
+          <tr>
+            <th class="bg-info" style="font-size: 14px" width="90">Cin</th>
+            <td>{{this.en?.cin}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table><br><br>
+
+  <table border="0" width="100%" style="text-align: center" >
+    <tr>
+      <td width="1048" colspan="11" >
+        <table border="1"  frame="void">
+          <tr >
+            <th cellspacing="2px"class="bg-info" style="font-size: 14px" >Déclaration</th>
+            <th class="bg-info" style="font-size: 14px" >Type d'enseignement</th>
+            <th class="bg-info" style="font-size: 14px" >Nombre d'heures</th>
+            <th class="bg-info" style="font-size: 14px" >Pourcentage annuel</th>
+            <th class="bg-info" style="font-size: 14px" >Pourcentage annuel brut</th>
+            <th class="bg-info" style="font-size: 14px" >Les absences</th>
+            <th class="bg-info" style="font-size: 14px" >Taux horaire</th>
+            <th class="bg-info" style="font-size: 14px" >Montant de la réduction</th>
+            <th class="bg-info" style="font-size: 14px" >montant Payable</th>
+            <th class="bg-info" style="font-size: 14px" >Impôts Revenu</th>
+            <th class="bg-info" style="font-size: 14px" >Montant net</th>
+          </tr>
+          <tr>
+            <th class="bg-info" style="font-size: 14px"  rowspan="3">les heures supplémentaires</th>
+            <th style="background-color: #DEE7E5" >Cours</th>
+            <td style="background-color: #DEE7E5">{{this.en.heuresSupp?.cours}}</td>
+            <td style="background-color: #DEE7E5">{{this.en.grade?.salaireCours}}</td>
+            <td style="background-color: #DEE7E5">{{pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours)}}</td>
+            <td style="background-color: #DEE7E5; color: red">{{absences(this.en?.absence)}}</td>
+            <td style="background-color: #DEE7E5">{{tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine)}}</td>
+            <td style="background-color: #DEE7E5">{{montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence))}}</td>
+            <td style="background-color: #DEE7E5">{{montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence)))}}</td>
+            <td style="background-color: #DEE7E5">{{impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence))))}}</td>
+            <td style="background-color: #DEE7E5">{{montantNet(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence)))))}}</td>
+          </tr>
+          <tr>
+            <th style="background-color: #B5C8C5">Td</th>
+            <td style="background-color: #B5C8C5">{{this.en.heuresSupp?.td}}</td>
+            <td style="background-color: #B5C8C5">{{this.en.grade?.salaireTd}}</td>
+            <td style="background-color: #B5C8C5">{{pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd)}}</td>
+            <td style="background-color: #B5C8C5; color: red ">{{absences( this.en?.absence)}}</td>
+            <td style="background-color: #B5C8C5">{{tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine)}}</td>
+            <td style="background-color: #B5C8C5">{{montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence))}}</td>
+            <td style="background-color: #B5C8C5">{{montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence)))}}</td>
+            <td style="background-color: #B5C8C5" >{{impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence))))}}</td>
+            <td style="background-color: #B5C8C5">{{montantNet(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence)))))}}</td>
+          </tr>
+          <tr>
+            <th style="background-color: #DEE7E5">Tp</th>
+            <td style="background-color: #DEE7E5">{{this.en.heuresSupp?.tp}}</td>
+            <td style="background-color: #DEE7E5">{{this.en.grade?.salaireTp}}</td>
+            <td style="background-color: #DEE7E5">{{pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp)}}</td>
+            <td style="background-color: #DEE7E5; color: red">{{absences( this.en?.absence)}}</td>
+            <td style="background-color: #DEE7E5">{{tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine)}}</td>
+            <td style="background-color: #DEE7E5">{{montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence))}}</td>
+            <td style="background-color: #DEE7E5">{{montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence)))}}</td>
+            <td style="background-color: #DEE7E5">{{impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence))))}}</td>
+            <td style="background-color: #DEE7E5">{{montantNet(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence)))))}}</td>
+          </tr>
+          <tr style="border-color: #FFFFFF" >
+            <td ></td>
+            <td></td>
+            <td></td>
+            <td style="background-color: #969B9A">Total</td>
+            <td style="background-color: #B5C8C5">{{totalpourcentageAnnuelBrut(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd),pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp) )}}</td>
+            <td ></td>
+            <td ></td>
+            <td style="background-color: #B5C8C5">{{totalMontantReduction(montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence)), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence)), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence)))}}</td>
+            <td style="background-color: #B5C8C5">{{totalMontantPayable(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence))), montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence))),montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence))))}}</td>
+            <td style="background-color: #B5C8C5">{{totalImpotsRevenu(impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence)))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence)))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence)))))}}</td>
+            <td style="background-color: #969B9A">{{totalMontantNet(montantNet(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.cours,this.en.grade?.salaireCours), montantReduction(tauxHoraire(this.en.grade?.salaireCours,this.etablisement?.nombreSomaine), absences(this.en?.absence))))), montantNet(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.td,this.en.grade?.salaireTd), montantReduction(tauxHoraire(this.en.grade?.salaireTd,this.etablisement?.nombreSomaine), absences(this.en?.absence))))), montantNet(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence))), impotsRevenu(montantPayable(pourcentageAnnuelBrut(this.en.heuresSupp?.tp,this.en.grade?.salaireTp), montantReduction(tauxHoraire(this.en.grade?.salaireTp,this.etablisement?.nombreSomaine), absences(this.en?.absence))))))}}</td></tr></table></td>
+    </tr>
+
+  </table>
+</form>
+
+
+

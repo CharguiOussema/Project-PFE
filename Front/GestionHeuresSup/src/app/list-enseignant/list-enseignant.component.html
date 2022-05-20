@@ -1,0 +1,36 @@
+
+<h3 style="text-align: center">liste des enseignants PFE</h3>
+<br>
+<form >
+
+  <div class="form-row ">
+    <div class="form-group has-search col-md-4" >
+      <span class="fa fa-search form-control-feedback "></span>
+      <input  #query (keyup)="search(query.value)" type="text" class="form-control" placeholder="Search..." style="border-radius: 16px;">
+    </div>
+  </div>
+  <table class="table table-striped" border="1" >
+    <thead class="bg-info" style="text-align: center">
+    <tr style="alignment: center">
+      <th>Prénom et Nom</th>
+      <th>identifiant Unique</th>
+      <th>Email</th>
+      <th>Grade</th>
+      <th>Fonction</th>
+      <th>Departement</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let e of listeEnseignant " style="cursor: pointer" (click)="detail(e)">
+      <td>{{e.prenomNom}}</td>
+      <td>{{e.identifiantUnique}}</td>
+      <td>{{e.email}}</td>
+      <td>{{e.grade?.titre}}</td>
+      <td>{{e.fonction?.titre}}</td>
+      <td>{{e.departement?.titre}}</td>
+
+
+    </tr>
+    </tbody>
+  </table>
+</form>

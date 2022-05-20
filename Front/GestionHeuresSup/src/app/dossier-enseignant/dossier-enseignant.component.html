@@ -1,0 +1,118 @@
+<h3 style="text-align: center">Dossier des heures supplémentaires et encadrement</h3>
+<br>
+<table width="100%" *ngIf="this.en.id != null">
+  <tr>
+    <td width="25%"></td>
+    <td width="25%"></td>
+    <td width="25%"><button class="btn btn-outline-info" type="button" (click)="downloadFileDossierEnseignantExcel('DossierEnseignant2.xlsx',this.en)" style="  height: 37.99306px; font-size: 17px">Télecharger le fichier Récap Excel</button></td>
+    <td width="25%"><button class="btn btn-outline-info" type="button" (click)="downloadFileDossierEnseignant('DossierEnseignant2.xlsx',this.en)" style="  height: 37.99306px; font-size: 17px">Télecharger le fichier Récap PDF</button></td>
+  </tr>
+</table>
+<br>
+<form [formGroup]="DossierForm">
+<table  width="100%"  style="text-align: center" ><tr>
+<table width="100%" border="1">
+  <tr>
+    <th class="bg-info" width="25%">Année universitaire</th>
+    <th width="75%">{{etablisement.anneeUniversitaire}}</th>
+  </tr>
+  <tr>
+    <th class="bg-info">Prénom et Nom</th>
+    <td> <select  class="form-select form-control" formControlName="enseignant" id="enseignant"   (ngModelChange)="selectEnseignant(this.enseignant.value)" >
+      <option [ngValue]="null"  disabled>Choisir un enseignant </option>
+      <option *ngFor="let e of listEnseignant" [ngValue]="e" >{{e.prenomNom}}</option>
+    </select></td>
+  </tr>
+  <tr>
+    <th class="bg-info">Grade</th>
+    <th>{{en.grade?.titre}}</th>
+  </tr>
+  <tr>
+    <th class="bg-info">Identifiant unique</th>
+    <th>{{en.identifiantUnique}}</th>
+  </tr>
+  <tr>
+    <th class="bg-info">RIB</th>
+    <th>{{en.rib}}</th>
+  </tr>
+
+</table>
+</tr>
+<tr>
+  <table border="1" width="100%">
+    <tr><th colspan="4" class="bg-info"> Nombre d'heures semestre 1</th></tr>
+    <tr>
+      <th class="bg-info" width="25%">Cours</th>
+      <th class="bg-info" width="25%">Td</th>
+      <th class="bg-info" width="25%">Tp</th>
+      <th class="bg-info" width="25%">Total</th>
+    </tr>
+    <tr>
+      <th>{{en.chargeHoraireS1?.cours}}</th>
+      <th>{{en.chargeHoraireS1?.td}}</th>
+      <th>{{en.chargeHoraireS1?.tp}}</th>
+      <th>{{total(en.chargeHoraireS1?.cours, en.chargeHoraireS1?.td, en.chargeHoraireS1?.tp)}}</th>
+    </tr>
+    <tr><td colspan="4"> &nbsp;</td></tr>
+  </table>
+</tr>
+  <tr>
+    <table border="1" width="100%">
+      <tr><th colspan="4" class="bg-info"> Nombre d'heures semestre 2</th></tr>
+      <tr>
+        <th class="bg-info" width="25%">Cours</th>
+        <th class="bg-info" width="25%">Td</th>
+        <th class="bg-info" width="25%">Tp</th>
+        <th class="bg-info" width="25%">Total</th>
+      </tr>
+      <tr>
+        <th>{{en.chargeHoraireS2?.cours}}</th>
+        <th>{{en.chargeHoraireS2?.td}}</th>
+        <th>{{en.chargeHoraireS2?.tp}}</th>
+        <th>{{total(en.chargeHoraireS2?.cours, en.chargeHoraireS2?.td, en.chargeHoraireS2?.tp)}}</th>
+      </tr>
+
+    </table>
+  </tr>
+  <tr>
+    <table border="1" width="100%">
+      <tr><th class="bg-info">Nombre d'encadrement PFE</th></tr>
+      <tr><th >{{en.chargeHorairePFE?.nombre}}&nbsp;</th></tr>
+    </table>
+  </tr>
+  <tr>
+    <table border="1" width="100%">
+      <tr><th colspan="4" class="bg-info"> Nombre total d'heures effectuées	</th></tr>
+      <tr>
+        <th class="bg-info" width="25%">Cours</th>
+        <th class="bg-info" width="25%">Td</th>
+        <th class="bg-info" width="25%">Tp</th>
+        <th class="bg-info" width="25%">Total des heures supplémentaires</th>
+      </tr>
+      <tr>
+        <th>{{totalHeureEffectue(en.chargeHoraireS1?.cours, en.chargeHoraireS2?.cours)}}</th>
+        <th>{{totalHeureEffectueAvecPFE(en.chargeHoraireS1?.td, en.chargeHoraireS2?.td, en.chargeHorairePFE?.nombre)}}</th>
+        <th>{{totalHeureEffectue(en.chargeHoraireS1?.tp, en.chargeHoraireS2?.tp)}}</th>
+        <th>{{total(totalHeureEffectue(en.chargeHoraireS1?.cours, en.chargeHoraireS2?.cours),totalHeureEffectueAvecPFE(en.chargeHoraireS1?.td, en.chargeHoraireS2?.td, en.chargeHorairePFE?.nombre) , totalHeureEffectue(en.chargeHoraireS1?.tp, en.chargeHoraireS2?.tp))}}</th>
+      </tr>
+
+    </table>
+  </tr>
+</table>
+<br>
+<table border="1" width="100%" style="text-align: center">
+  <tr><th colspan="3" class="bg-info"> Nombre d'heures supplémentaires	</th></tr>
+  <tr>
+    <th class="bg-info" width="33%">Cours</th>
+    <th class="bg-info" width="33%">Td</th>
+    <th class="bg-info" width="33%">Tp</th>
+  </tr>
+  <tr>
+    <th>{{en.heuresSupp?.cours}}&nbsp;</th>
+    <th>{{en.heuresSupp?.td}}&nbsp;</th>
+    <th>{{en.heuresSupp?.tp}}&nbsp;</th>
+
+  </tr>
+
+</table>
+</form>

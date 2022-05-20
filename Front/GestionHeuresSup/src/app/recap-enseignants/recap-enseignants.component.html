@@ -1,0 +1,62 @@
+<h3 style="text-align: center">Récap des enseignants</h3>
+<br>
+
+<div class="form-row" align="right">
+<div class="form-group"   >
+  <button class="btn btn-outline-info" type="button" (click)="donwloadFileRecapPDF('Recap2.xlsx')" style="  height: 37.99306px; font-size: 17px">Télecharger le fichier Récap PDF</button>
+</div>
+  <div class="form-group"  >
+    <button class="btn btn-outline-info" type="button" (click)="donwloadFileRecapExcel('Recap2.xlsx')"  style="  height: 37.99306px; font-size: 17px">Télecharger le fichier Récap Excel</button>
+  </div>
+  </div>
+
+<br>
+<table border="0" width="50%" style="text-align: center">
+  <tr>
+    <th class="nb"  width="45%"></th>
+    <th class="bg-info">Montant Payable	</th>
+    <th class="bg-info">Impôts Revenu	</th>
+    <th class="bg-info">Montant Net</th>
+  </tr>
+  <tr>
+    <th class="bg-info" >Total compte postal</th>
+    <td >{{this.totalMontantPayableComptePostalTab1}}</td>
+    <td >{{this.totalImpotsRevenuPostalTab1}}</td>
+    <td >{{this.totalMontantNetPostalTab1}}</td>
+  </tr>
+  <tr>
+    <th class="bg-info">Total compte bancaire</th>
+    <td >{{this.totalMontantPayableCompteBancaireTab1}}</td>
+    <td >{{this.totalImpotsRevenuBancaireTab1}}</td>
+    <td >{{this.totalMontantNetBancaireTab1}}</td>
+  </tr>
+  <tr>
+    <th class="bg-info">Total Général</th>
+    <td >{{this.totalMontantPayableTab1}}</td>
+    <td >{{this.totalImpotsRevenuTab1}}</td>
+    <td >{{this.totalMontantNetTab1}}</td>
+  </tr>
+
+</table>
+<br>
+<table border="1" width="100%" style="text-align: center">
+  <tr class="bg-info">
+  <th>Prénom et Nom</th>
+  <th>Grade</th>
+  <th>RIB</th>
+  <th>Compte bancaire ou postal</th>
+  <th>montant Payable</th>
+  <th>Impôts Revenu</th>
+  <th>Montant net</th>
+  </tr>
+  <tr *ngFor="let e of enseignants">
+    <td>{{e.prenomNom}}</td>
+    <td>{{e.grade?.titre}} </td>
+    <td>{{e.rib}}</td>
+    <td>{{compte(e.rib)}}</td>
+    <td>{{totalMontantPayable(e)}}</td>
+    <td>{{impotsRevenu(totalMontantPayable(e))}}</td>
+    <td>{{totalMontantNet(totalMontantPayable(e), impotsRevenu(totalMontantPayable(e)))}}</td>
+  </tr>
+</table>
+

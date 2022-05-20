@@ -1,0 +1,101 @@
+
+<div class="card mb-4">
+  <div class="card-header"><h3 style="text-align: center">Ajouter un stage PFE</h3></div>
+  <div class="card-body">
+<form [formGroup]="addStage" (ngSubmit)="addstagepfe()">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="parcours1">Parcours Etudiant 1</label>
+  <select class="form-control" formControlName="parcours1" id ="parcours1" (ngModelChange)="selectChangeParcours1(this.parcours1.value)"
+          [ngClass]="{'is-invalid':parcours1&&parcours1.errors && parcours1.touched}">
+    <option [ngValue]="null"  disabled>Choisir un parcours de l'étudiant 1 </option>
+    <option *ngFor="let p1 of listParcours1" value="{{p1.titre}}">{{p1.titre}} </option>
+  </select>
+      <div *ngIf="parcours1&&parcours1.hasError('required')"
+           class="invalid-feedback">
+        Etudiant 1 est Obligatoire*
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+  <div *ngIf="this.parcours1.value !=null">
+  <label for="etudiant1">Etudiant1</label>
+  <select class="form-control" formControlName="etudiant1" id ="etudiant1" [(ngModel)]="etudiantPFE1">
+    <option *ngFor="let e1 of ListEtudiant1" [ngValue]="e1">{{e1.prenomNom}} </option>
+  </select>
+
+  </div>
+    </div>
+  <div class="form-group col-md-6" *ngIf="this.etudiantPFE1.cin !=null ">
+    <label for="Cin1" class="form-label" >Cin</label>
+    <input type="text" value="{{etudiantPFE1.cin}}" class="form-control"  id="Cin1" readonly>
+  </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="parcours2">Parcours Etudiant 2</label>
+  <select class="form-control" formControlName="parcours2" id ="parcours2" (ngModelChange)="selectChangeParcours2(this.parcours2.value)">
+    <option [ngValue]="null"  disabled>Choisir un parcours de l'étudiant 2 </option>
+    <option *ngFor="let p2 of listParcours2" value="{{p2.titre}}">{{p2.titre}} </option>
+  </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+  <div *ngIf="this.parcours2.value !=null">
+  <label for="etudiant2">Etudiant 2</label>
+  <select id="etudiant2" class="form-control" formControlName="etudiant2" [(ngModel)]="etudiantPFE2">
+    <option *ngFor="let e2 of ListEtudiant2" [ngValue]="e2" >{{e2.prenomNom}} </option>
+  </select>
+  </div>
+    </div>
+    <div class="form-group col-md-6">
+  <div class="mb-3" *ngIf="this.etudiantPFE2.cin !=null ">
+    <label for="Cin2" class="form-label" >Cin</label>
+    <input type="text" value="{{etudiantPFE2.cin}}" class="form-control"  id="Cin2" readonly>
+  </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="enseignant">Enseignant</label>
+  <select id="enseignant" class="form-control" formControlName="enseignant" ngModel [(ngModel)]="enseignantinfo">
+    <option *ngFor="let en of listEnseignant" [ngValue]="en" >{{en.prenomNom}} </option>
+  </select>
+    </div>
+
+  <div class="form-group col-md-6" *ngIf="this.enseignantinfo.cin !=null ">
+    <label for="Cin3" class="form-label" >Cin</label>
+    <input type="text" value="{{enseignantinfo.cin}}" class="form-control"  id="Cin3" readonly>
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="sujet" class="form-label">Sujet</label>
+    <input type="text" class="form-control" formControlName="sujet" id="sujet" [ngClass]="{'is-invalid':sujet&&sujet.errors && sujet.touched}" >
+    <div *ngIf="sujet&&sujet.hasError('required')"
+         class="invalid-feedback">
+      Le sujet est Obligatoire*
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="societe" class="form-label">Société</label>
+    <input type="text" class="form-control" formControlName="societe" id="societe"
+           [ngClass]="{'is-invalid':societe&&societe.errors && societe.touched}">
+    <div *ngIf="societe&&societe.hasError('required')"
+         class="invalid-feedback">
+      Société est Obligatoire*
+    </div>
+  </div>
+
+  </div>
+  <div class="mb-3">
+    <label for="departement" class="form-label" >Departement</label>
+    <input type="text" value="{{departement?.titre}}" class="form-control" formControlName="departement" id="departement" readonly>
+  </div>
+  <button  class="btn btn-primary">Ajouter</button>
+</form>
+  </div>
+</div>

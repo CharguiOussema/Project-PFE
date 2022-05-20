@@ -1,0 +1,31 @@
+<p>list-stage-by-departement works!</p>
+<p>list-stage-by-enseignant works!</p>
+<table class="table table-striped">
+
+  <thead>
+  <tr>
+    <th>Etudiant1</th>
+    <th>parcours</th>
+    <th>Etudiant2</th>
+    <th>parcours</th>
+    <th>Sujet</th>
+    <th>Encadrant</th>
+    <th>Société</th>
+    <th>Département</th>
+    <th>Statut</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let s of stagesPFE ">
+    <td>{{s.etudiantPFE1?.prenomNom}}</td>
+    <td>{{s.etudiantPFE1?.parcours.titre}}</td>
+    <td>{{s.etudiantPFE2?.prenomNom}}</td>
+    <td>{{s.etudiantPFE2?.parcours.titre}}</td>
+    <td>{{s.sujet}}</td>
+    <td>{{s.enseignant?.prenomNom}}</td>
+    <td>{{s.societe}}</td>
+    <td>{{s.departement?.titre}}</td>
+    <td>{{s.statut?.titre}}</td>
+  </tr>
+  </tbody>
+</table>

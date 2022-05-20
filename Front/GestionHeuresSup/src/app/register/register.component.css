@@ -1,0 +1,12 @@
+.test{
+  background-image: url("src/assets/img/iset.jpg");
+  background-repeat: no-repeat;
+
+  background-position:center;
+  background-size:contain;
+}
+h3 {
+  background: linear-gradient(to right, #36ecde, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

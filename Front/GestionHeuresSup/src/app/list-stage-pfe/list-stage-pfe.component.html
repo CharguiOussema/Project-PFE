@@ -1,0 +1,51 @@
+
+<h3 style="text-align: center">liste des stages PFE</h3>
+<br>
+<form [formGroup]="stagepfe" >
+  <div class="form-row ">
+    <div class="form-group has-search col-md-4" >
+      <span class="fa fa-search form-control-feedback "></span>
+      <input #query (keyup)="search(query.value)" type="text" class="form-control" placeholder="Search..." style="border-radius: 16px;">
+    </div>
+  </div>
+<table class="table table-striped" border="1" >
+  <thead class="bg-info" style="text-align: center">
+  <tr>
+    <th>Etudiant 1</th>
+    <th>parcours</th>
+    <th>Etudiant 2</th>
+    <th>parcours</th>
+    <th>Sujet</th>
+    <th>Encadrant</th>
+    <th>Société</th>
+    <th>Département</th>
+    <th>Statut</th>
+    <th *ngIf="this.tokenservice.getFonction() === 'ressource humaine'" >Modifier Statut</th>
+    <th *ngIf="this.tokenservice.getFonction() === 'ressource humaine'">Confirme</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let s of stagesPFE " (click)="UpdateStage(s.id)" style="cursor: pointer">
+
+    <td style="cursor: pointer">{{s.etudiantPFE1?.prenomNom}}</td>
+    <td style="cursor: pointer">{{s.etudiantPFE1?.parcours.titre}}</td>
+    <td style="cursor: pointer">{{s.etudiantPFE2?.prenomNom}}</td>
+    <td style="cursor: pointer" >{{s.etudiantPFE2?.parcours.titre}}</td>
+    <td style="cursor: pointer" >{{s.sujet}}</td>
+    <td style="cursor: pointer" >{{s.enseignant?.prenomNom}}</td>
+    <td style="cursor: pointer" >{{s.societe}}</td>
+    <td style="cursor: pointer" >{{s.departement?.titre}}</td>
+    <td style="cursor: pointer" >{{s.statut?.titre}}</td>
+
+    <td *ngIf="this.tokenservice.getFonction() === 'ressource humaine'"><select class="form-control" formControlName="statut" id ="statut" style="border-radius: 16px;">
+      <option [ngValue]="null" disabled>{{s.statut.titre}}</option>
+      <option *ngFor="let st of listStatut " [ngValue]="st">  {{st.titre}}</option>
+    </select></td>
+    <td *ngIf="this.tokenservice.getFonction() === 'ressource humaine'"><button (click)="updateStatut(s)" class="btn btn-info" style="border-radius: 16px;">Valider</button></td>
+
+  </tr>
+  </tbody>
+</table>
+</form>
+
+

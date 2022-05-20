@@ -1,0 +1,156 @@
+
+<div class="card mb-4">
+  <div class="card-header"><h3 style="text-align: center">Gérer votre profile</h3></div>
+  <div class="card-body">
+<form [formGroup]="updateForm" (ngSubmit)="updateEnseignant()" >
+  <div class="mb-3" hidden>
+    <label for="id" class="form-label">Id</label>
+    <input type="number" class="form-control" formControlName="id" id="id"  readonly>
+  </div>
+<!--  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="prenomNom" class="form-label">Prénom & Nom </label>
+    <input type="text" class="form-control" formControlName="prenomNom" id="prenomNom" >
+  </div>
+  <div class="form-group col-md-6">
+    <label for="prenomNomArabe" class="form-label">الاسم و اللقب </label>
+    <input type="text" class="form-control" formControlName="prenomNomArabe" id="prenomNomArabe" >
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="cin" class="form-label">Cin</label>
+    <input type="number" class="form-control" formControlName="cin" readonly id="cin" >
+  </div>
+  <div class="form-group col-md-6">
+    <label for="identifiantUnique" class="form-label">Identifiant Unique</label>
+    <input type="number" class="form-control" formControlName="identifiantUnique" readonly id="identifiantUnique" >
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" formControlName="email" id="email" >
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="numTel" class="form-label">Numéro de téléphone</label>
+    <input type="tel" class="form-control" formControlName="numTel" id="numTel"  >
+  </div>
+
+  <div class="form-group col-md-6">
+    <label for="dateNaissance" class="form-label">Date de Naissance </label>
+    <input type="date" class="form-control" formControlName="dateNaissance" id="dateNaissance" >
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="lieuNaissance" class="form-label">Lieu de Naissance</label>
+    <input type="text" class="form-control" formControlName="lieuNaissance" id="lieuNaissance" >
+  </div>
+  <div class="form-group col-md-6">
+    <label for="lieuNaissanceArabe" class="form-label">مكان الولادة</label>
+    <input type="text" class="form-control" formControlName="lieuNaissanceArabe" id="lieuNaissanceArabe" >
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="rib" class="form-label">RIB</label>
+    <input type="number" class="form-control" formControlName="rib" readonly id="rib" >
+  </div>-->
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="prenomNom" class="form-label">Prénom & Nom</label>
+      <input type="text" class="form-control" formControlName="prenomNom" id="prenomNom" style="border-radius: 16px;"
+             [ngClass]="{'is-invalid':prenomNom&&prenomNom.errors && prenomNom.touched}">
+      <div *ngIf="prenomNom&&prenomNom.hasError('required')"
+           class="invalid-feedback">
+        Le nom et prénom est Obligatoire*
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="prenomNomArabe" class="form-label">الاسم و اللقب</label>
+      <input type="text" class="form-control" formControlName="prenomNomArabe" id="prenomNomArabe" style="border-radius: 16px;"
+             [ngClass]="{'is-invalid':prenomNomArabe&&prenomNomArabe.errors && prenomNomArabe.touched}">
+      <div *ngIf="prenomNomArabe&&prenomNomArabe.hasError('required')"
+           class="invalid-feedback">
+        Le nom et prénom Arabe est Obligatoire*
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="cin" class="form-label">Cin</label>
+      <input type="number" class="form-control" formControlName="cin" readonly id="cin" >
+    </div>
+    <div class="form-group col-md-6">
+      <label for="identifiantUnique" class="form-label">Identifiant Unique</label>
+      <input type="number" class="form-control" formControlName="identifiantUnique" readonly id="identifiantUnique" >
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" formControlName="email" id="email" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':email&&email.errors && email.touched}">
+    <div *ngIf="email&&email.hasError('required')"
+         class="invalid-feedback">
+      L'email est Obligatoire*
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="numTel" class="form-label">Numéro de téléphone</label>
+      <input type="tel" class="form-control" formControlName="numTel" id="numTel" style="border-radius: 16px;"
+             [ngClass]="{'is-invalid':numTel&&numTel.errors && numTel.touched}">
+      <div *ngIf="numTel&&numTel.hasError('required')"
+           class="invalid-feedback">
+        Le numéro de télèphone est Obligatoire*
+      </div>
+      <div *ngIf="numTel&&numTel.hasError('pattern')"
+           class="invalid-feedback">
+        Le numéro de téléphone doit être 8 chiffres*
+      </div>
+    </div>
+
+
+    <div class="form-group col-md-6">
+      <label for="dateNaissance" class="form-label">Date de Naissance</label>
+      <input type="date" class="form-control" formControlName="dateNaissance" id="dateNaissance" style="border-radius: 16px;"
+             [ngClass]="{'is-invalid':dateNaissance&&dateNaissance.errors && dateNaissance.touched}">
+      <div *ngIf="dateNaissance&&dateNaissance.hasError('required')"
+           class="invalid-feedback">
+        Le date de naissance est Obligatoire*
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="lieuNaissance" class="form-label">Lieu de Naissance</label>
+      <input type="text" class="form-control" formControlName="lieuNaissance" id="lieuNaissance" style="border-radius: 16px;"
+             [ngClass]="{'is-invalid':lieuNaissance&&lieuNaissance.errors && lieuNaissance.touched}">
+      <div *ngIf="lieuNaissance&&lieuNaissance.hasError('required')"
+           class="invalid-feedback">
+        Le lieu de naissance est Obligatoire*
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="lieuNaissanceArabe" class="form-label" style="text-align: right">مكان الولادة</label>
+      <input type="text" class="form-control" formControlName="lieuNaissanceArabe" id="lieuNaissanceArabe" style="border-radius: 16px;"
+             [ngClass]="{'is-invalid':lieuNaissanceArabe&&lieuNaissanceArabe.errors && lieuNaissanceArabe.touched}">
+      <div *ngIf="lieuNaissanceArabe&&lieuNaissanceArabe.hasError('required')"
+           class="invalid-feedback">
+        Le lieu de Naissance en arabe est Obligatoire*
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="rib" class="form-label">RIB</label>
+    <input type="number" class="form-control" formControlName="rib" readonly id="rib" >
+  </div>
+  <button  class="btn btn-primary">Modifier</button>
+
+</form>
+  </div>
+</div>

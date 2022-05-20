@@ -1,0 +1,50 @@
+
+
+
+<div class="card mb-4">
+  <div class="card-header"><h3 style="text-align: center">Information de l'établissement</h3></div>
+  <div class="card-body">
+<form [formGroup]="etablissementForm" (ngSubmit)="updateEtablissement()">
+  <div class="mb-3 form-group" >
+    <label for="nom" class="form-label">Nom de l'établissement</label>
+    <input type="text" class="form-control" formControlName="nom" id="nom" >
+  </div>
+  <div class="form-row" >
+  <div class="col-md-6 form-group" >
+    <label for="anneeUniversitaire" class="form-label">Anneé universitaire</label>
+    <input type="text" class="form-control" formControlName="anneeUniversitaire" id="anneeUniversitaire" >
+  </div>
+  <div class="col-md-6 form-group" >
+    <label for="nombreProjetPFE" class="form-label">Nombre des projets PFE</label>
+    <input type="number" class="form-control" formControlName="nombreProjetPFE" id="nombreProjetPFE" >
+  </div>
+  </div>
+  <div class="form-row" >
+  <div class="col-md-6 form-group" >
+    <label for="pourcentageEncadrement" class="form-label">Pourcentage des encadrements</label>
+    <input type="number" class="form-control" formControlName="pourcentageEncadrement" id="pourcentageEncadrement" readonly>
+  </div>
+  <div class="col-md-6 form-group" >
+    <label for="nombreEnseignant" class="form-label">Nombre des enseignants</label>
+    <input type="number" class="form-control" formControlName="nombreEnseignant" id="nombreEnseignant" >
+  </div>
+  </div>
+  <div class="form-row" >
+  <div class="col-md-6 form-group" >
+    <label for="periode" class="form-label"> Période d'enseignement</label>
+    <input type="text" class="form-control" formControlName="periode" id="periode" >
+  </div>
+  <div class="col-md-6 form-group" >
+    <label for="periodeArabe" class="form-label" style="text-align: right"> فترة التدريس</label>
+    <input type="text" class="form-control" formControlName="periodeArabe" id="periodeArabe" >
+  </div>
+  </div>
+  <div class="mb-3" >
+    <label for="nombreSomaine" class="form-label">Nombre des semaines annuaire</label>
+    <input type="number" class="form-control" formControlName="nombreSomaine" id="nombreSomaine" >
+  </div>
+  <button  class="btn btn-primary">Modifier</button>
+</form>
+  </div>
+</div>
+

@@ -1,0 +1,184 @@
+
+<div style ="background-color: #1c606a;">
+
+  <div class="col-xl-8" style="margin-left: auto ; margin-right: auto ; margin-bottom: auto; margin-top: auto; padding-top: 5%; padding-bottom: 5%"  >
+
+    <div class="card mb-4" style="border-radius: 16px;">
+  <div class="card-header" ><h3 style="text-align: center">Inscription </h3></div>
+  <div class="card-body" >
+
+<form [formGroup]="registerForm" (ngSubmit)="register()" >
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="prenomNom" class="form-label">Prénom & Nom</label>
+    <input type="text" class="form-control" formControlName="prenomNom" id="prenomNom" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':prenomNom&&prenomNom.errors && prenomNom.touched}">
+      <div *ngIf="prenomNom&&prenomNom.hasError('required')"
+           class="invalid-feedback">
+        Le nom et prénom est Obligatoire*
+      </div>
+  </div>
+
+    <div class="form-group col-md-6">
+    <label for="prenomNomArabe" class="form-label">الاسم و اللقب</label>
+    <input type="text" class="form-control" formControlName="prenomNomArabe" id="prenomNomArabe" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':prenomNomArabe&&prenomNomArabe.errors && prenomNomArabe.touched}">
+      <div *ngIf="prenomNomArabe&&prenomNomArabe.hasError('required')"
+           class="invalid-feedback">
+        Le nom et prénom Arabe est Obligatoire*
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="cin" class="form-label">Cin</label>
+    <input type="number" class="form-control" formControlName="cin"  id="cin" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':cin&&cin.errors && cin.touched}">
+      <div *ngIf="cin&&cin.hasError('required')"
+           class="invalid-feedback">
+        Le numéro CIN est Obligatoire*
+      </div>
+      <div *ngIf="cin&&cin.hasError('pattern')"
+           class="invalid-feedback">
+        Le cin  doit être 8 chiffres*
+      </div>
+  </div>
+    <div class="form-group col-md-6">
+    <label for="identifiantUnique" class="form-label">Identifiant Unique</label>
+    <input type="number" class="form-control" formControlName="identifiantUnique" id="identifiantUnique" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':identifiantUnique&&identifiantUnique.errors && identifiantUnique.touched}">
+      <div *ngIf="identifiantUnique&&identifiantUnique.hasError('required')"
+           class="invalid-feedback">
+        Le identifiant Unique est Obligatoire*
+      </div>
+  </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" formControlName="email" id="email" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':email&&email.errors && email.touched}">
+    <div *ngIf="email&&email.hasError('required')"
+         class="invalid-feedback">
+      L'email est Obligatoire*
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="numTel" class="form-label">Numéro de téléphone</label>
+    <input type="tel" class="form-control" formControlName="numTel" id="numTel" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':numTel&&numTel.errors && numTel.touched}">
+      <div *ngIf="numTel&&numTel.hasError('required')"
+           class="invalid-feedback">
+        Le numéro de télèphone est Obligatoire*
+      </div>
+      <div *ngIf="numTel&&numTel.hasError('pattern')"
+           class="invalid-feedback">
+        Le numéro de téléphone doit être 8 chiffres*
+      </div>
+  </div>
+    <div class="form-group col-md-6">
+    <label for="dateNaissance" class="form-label">Date de Naissance</label>
+    <input type="date" class="form-control" formControlName="dateNaissance" id="dateNaissance" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':dateNaissance&&dateNaissance.errors && dateNaissance.touched}">
+      <div *ngIf="dateNaissance&&dateNaissance.hasError('required')"
+           class="invalid-feedback">
+        Le date de naissance est Obligatoire*
+      </div>
+  </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="lieuNaissance" class="form-label">Lieu de Naissance</label>
+    <input type="text" class="form-control" formControlName="lieuNaissance" id="lieuNaissance" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':lieuNaissance&&lieuNaissance.errors && lieuNaissance.touched}">
+      <div *ngIf="lieuNaissance&&lieuNaissance.hasError('required')"
+           class="invalid-feedback">
+        Le lieu de naissance est Obligatoire*
+      </div>
+  </div>
+    <div class="form-group col-md-6">
+    <label for="lieuNaissanceArabe" class="form-label" style="text-align: right">مكان الولادة</label>
+    <input type="text" class="form-control" formControlName="lieuNaissanceArabe" id="lieuNaissanceArabe" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':lieuNaissanceArabe&&lieuNaissanceArabe.errors && lieuNaissanceArabe.touched}">
+      <div *ngIf="lieuNaissanceArabe&&lieuNaissanceArabe.hasError('required')"
+           class="invalid-feedback">
+        Le lieu de Naissance en arabe est Obligatoire*
+      </div>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="rib" class="form-label">RIB</label>
+    <input type="number" class="form-control" formControlName="rib" id="rib" style="border-radius: 16px;"
+           [ngClass]="{'is-invalid':rib&&rib.errors && rib.touched}">
+
+    <div *ngIf="rib&&rib.hasError('required')"
+         class="invalid-feedback">
+      Le Rib est Obligatoire*
+    </div>
+    <div *ngIf="rib&&rib.hasError('pattern')"
+         class="invalid-feedback">
+      Le Rib doit être 20 chiffres*
+    </div>
+  </div>
+  <div class="form-row ">
+    <div class="form-group col-md-4">
+    <label for="grade" class="form-label">Grade</label>
+    <select class="form-control" formControlName="grade" id ="grade" style="border-radius: 16px;"
+
+            [ngClass]="{'is-invalid':grade&&grade.errors && grade.touched}">
+      <option [ngValue]="null" > choisir un grade</option>
+      <option *ngFor="let g of listGrade " [ngValue]="g">{{g.titre}}</option>
+    </select>
+      <div *ngIf="grade&&grade.hasError('required')"
+           class="invalid-feedback">
+        Le grade est Obligatoire*
+      </div>
+  </div>
+
+    <div class="form-group col-md-4">
+    <label for="departement" class="form-label">Departement</label>
+    <select class="form-control" formControlName="departement" id ="departement" style="border-radius: 16px;"
+            [ngClass]="{'is-invalid':departement&&departement.errors && departement.touched}">
+      <option [ngValue]="null" > choisir un département</option>
+      <option *ngFor="let d of listDepartement" [ngValue]="d">{{d.titre}}</option>
+    </select>
+      <div *ngIf="departement&&departement.hasError('required')"
+           class="invalid-feedback">
+        Le departement est Obligatoire*
+      </div>
+  </div>
+    <div class="form-group col-md-4">
+    <label for="fonction" class="form-label">Fonction</label>
+    <select class="form-control" formControlName="fonction" id ="fonction" style="border-radius: 16px;"
+            [ngClass]="{'is-invalid':fonction&&fonction.errors && fonction.touched}">
+      <option [ngValue]="null" > choisir une fonction</option>
+      <option *ngFor="let f of listFonction" [ngValue]="f">{{f.titre}}</option>
+    </select>
+      <div *ngIf="fonction&&fonction.hasError('required')"
+           class="invalid-feedback">
+        Le fonction est Obligatoire*
+      </div>
+  </div>
+  </div>
+
+
+
+  <button  class="btn btn-primary btn-user btn-block "style="border-radius: 16px;" >Register</button>
+<br>
+  <div style="text-align: center">
+ <a class="small" href="/login" > <span style="font-size: large" >Vous avez déjà un compte? Connexion!</span></a>
+  </div>
+  <!--<button type="reset" class="btn btn-danger">Reset</button> !-->
+
+  <!-- <button type="reset" class="btn btn-danger d-grid gap-2 d-md-flex justify-content-md-end" >test</button>!-->
+
+
+ </form>
+
+   </div>
+ </div>
+ </div>
+ </div>

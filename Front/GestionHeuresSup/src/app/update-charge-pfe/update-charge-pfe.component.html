@@ -1,0 +1,24 @@
+<div class="card mb-4" style="border-radius: 16px">
+  <div class="card-header"><h3 style="text-align: center">Chharge horaire PFE</h3></div>
+  <div class="card-body">
+<form [formGroup]="chargePFEForm" (ngSubmit)="updateChargePFE()" >
+
+<div class="form-group ">
+  <label class="small mb-1" for="nombre" >Nombre</label>
+  <input class="form-control" formControlName="nombre" id="nombre" type="number"  style="border-radius: 16px;"
+         [ngClass]="{'is-invalid':nombre&&nombre.errors && nombre.touched}">
+  <div *ngIf="nombre&&nombre.hasError('required')"
+       class="invalid-feedback">
+    Le nombre de PFE est Obligatoire*
+  </div>
+</div>
+<div class="form-group ">
+  <label class="small mb-1" for="encadrement">Encadrement</label>
+  <input class="form-control" formControlName="encadrement" id="encadrement" type="number" value="{{this.nombre.value * this.chargeHorairePFE.coefficient}}" readonly style="border-radius: 16px;">
+</div>
+<button  class="btn btn-primary">Ajoute</button>
+<button  type="reset" (click)="close()" class="btn btn-danger" >Fermer</button>
+
+</form>
+  </div>
+</div>

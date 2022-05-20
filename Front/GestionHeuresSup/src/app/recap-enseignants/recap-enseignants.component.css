@@ -1,0 +1,44 @@
+
+body {
+  background: white;
+}
+
+table {
+  border-collapse: collapse;
+}
+td {
+  border: 1px solid;
+}
+td.nb {
+  border: 0 !important;
+}
+
+/* New class for cells affected by this issue */
+td.nbtb {
+  position: relative;
+  border: 0 !important;
+}
+
+/* Pseudo-element to cover up the borders */
+td.nbtb::after {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  content: '';
+  width: 100%;
+  height: calc(100% + 1px);
+  border: 1px solid white;
+  box-sizing: border-box;
+}
+h3 {
+  background: linear-gradient(to right, #36ecde, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.form-row {
+  /* display: -webkit-inline-box; */
+  /* flex-wrap: inherit; */
+  margin-right: -5px;
+  margin-left: 50%;
+}
